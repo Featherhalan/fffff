@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Feather Softworks Roblox Offsets - version-760d064d05424689">
+    <title>Offsets | Feather Softworks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #a1a1aa;
+            --accent: #27272a;
+            --background: #09090b;
+            --surface: #18181b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        /* Noise texture overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+        
+        /* Glass morphism */
+        .glass {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Grid pattern */
+        .grid-pattern {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Code block styling */
+        .code-block {
+            background: #0d0d0f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .code-header {
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Syntax highlighting colors */
+        .token-keyword { color: #c678dd; }
+        .token-type { color: #e5c07b; }
+        .token-number { color: #d19a66; }
+        .token-string { color: #98c379; }
+        .token-comment { color: #5c6370; font-style: italic; }
+        .token-namespace { color: #e06c75; }
+        .token-variable { color: #abb2bf; }
+        
+        /* Offset value highlight */
+        .offset-value {
+            color: #61afef;
+            font-weight: 600;
+        }
+        
+        /* Copy button */
+        .copy-btn {
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        
+        /* Section hover effect */
+        .offset-section {
+            transition: all 0.3s ease;
+        }
+        .offset-section:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        /* Search highlight */
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+    <div class="noise"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                        <img src="logo.png" alt="Feather Softworks" class="w-8 h-8 object-contain">
+                        <span class="font-display font-bold text-xl tracking-tight">FEATHER</span>
+                    </a>
+                    <span class="text-gray-600">/</span>
+                    <span class="text-gray-400 font-medium">offsets</span>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex items-center space-x-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-xs text-gray-400 font-mono">version-760d064d05424689</span>
+                    </div>
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12 min-h-screen grid-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header -->
+            <div class="mb-8">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-12 h-12 rounded-xl glass flex items-center justify-center">
+                        <i data-lucide="file-code-2" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-display text-3xl md:text-4xl font-bold">Roblox Offsets</h1>
+                        <p class="text-gray-400 text-sm mt-1">Memory offsets for Roblox version-760d064d05424689</p>
+                    </div>
+                </div>
+                
+                <!-- Info Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="glass rounded-lg p-4 border border-white/10 flex items-center space-x-3">
+                        <i data-lucide="git-commit" class="w-5 h-5 text-blue-400"></i>
+                        <div>
+                            <div class="text-xs text-gray-500 uppercase">Version</div>
+                            <div class="font-mono text-sm text-white">version-760d064d05424689</div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-lg p-4 border border-white/10 flex items-center space-x-3">
+                        <i data-lucide="building-2" class="w-5 h-5 text-purple-400"></i>
+                        <div>
+                            <div class="text-xs text-gray-500 uppercase">From</div>
+                            <div class="text-sm text-white">Feather Softworks</div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-lg p-4 border border-white/10 flex items-center space-x-3">
+                        <i data-lucide="users" class="w-5 h-5 text-green-400"></i>
+                        <div>
+                            <div class="text-xs text-gray-500 uppercase">Contributors</div>
+                            <div class="text-sm text-white">Hala / htyb</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search -->
+                <div class="relative max-w-md">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+                    <input type="text" id="searchInput" placeholder="Search offsets (e.g., 'Humanoid', '0x194')..." 
+                           class="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors font-mono text-sm">
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="flex flex-wrap gap-2 mb-6 text-xs">
+                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400">
+                    <span class="text-white font-semibold" id="totalNamespaces">0</span> Namespaces
+                </span>
+                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400">
+                    <span class="text-white font-semibold" id="totalOffsets">0</span> Total Offsets
+                </span>
+                <span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                    C++ Header
+                </span>
+            </div>
+
+            <!-- Code Container -->
+            <div class="code-container relative">
+                <!-- Copy Button -->
+                <button onclick="copyCode()" class="copy-btn absolute top-4 right-4 z-10 glass px-4 py-2 rounded-lg border border-white/10 hover:bg-white/10 transition-all flex items-center space-x-2 text-sm">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    <span id="copyText">Copy All</span>
+                </button>
+
+                <!-- Code Block -->
+                <div class="code-block rounded-xl overflow-hidden">
+                    <div class="code-header px-4 py-3 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                            </div>
+                            <span class="ml-3 text-xs text-gray-500 font-mono">offsets.hpp</span>
+                        </div>
+                        <span class="text-xs text-gray-600 font-mono">// clang-format off</span>
+                    </div>
+                    
+                    <div class="p-4 overflow-x-auto" id="codeContent">
+                        <pre class="font-mono text-sm"><code><span class="token-comment">// [+] Roblox Version: version-760d064d05424689</span>
+<span class="token-comment">// [+] From: Feather Softworks</span>
+<span class="token-comment">// [+] From: Hala/htyb</span>
+<span class="token-comment">//</span>
+<span class="token-comment">// #pragma once</span>
+<span class="token-keyword">#pragma</span> <span class="token-keyword">once</span>
+<span class="token-keyword">#include</span> <span class="token-string">&lt;cstdint&gt;</span>
+
+<span class="token-comment">// clang-format off</span>
+<span class="token-keyword">namespace</span> <span class="token-namespace">offsets</span> {
+    <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-keyword">const</span> <span class="token-type">char</span>* <span class="token-variable">roblox_version</span> = <span class="token-string">"version-760d064d05424689"</span>;
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Atmosphere</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Color</span> = <span class="offset-value">0xD0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Decay</span> = <span class="offset-value">0xDC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Density</span> = <span class="offset-value">0xE8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Glare</span> = <span class="offset-value">0xEC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Haze</span> = <span class="offset-value">0xF0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Offset</span> = <span class="offset-value">0xF4</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">BasePart</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CastShadow</span> = <span class="offset-value">0xF5</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Color3</span> = <span class="offset-value">0x194</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Locked</span> = <span class="offset-value">0xF6</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Massless</span> = <span class="offset-value">0xF7</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Primitive</span> = <span class="offset-value">0x148</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Reflectance</span> = <span class="offset-value">0xEC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Shape</span> = <span class="offset-value">0x1B1</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Transparency</span> = <span class="offset-value">0xF0</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">BloomEffect</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Intensity</span> = <span class="offset-value">0xD0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Size</span> = <span class="offset-value">0xD4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Threshold</span> = <span class="offset-value">0xD8</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">ByteCode</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Pointer</span> = <span class="offset-value">0x10</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Size</span> = <span class="offset-value">0x20</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Camera</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CFrame</span> = <span class="offset-value">0xF8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">FieldOfView</span> = <span class="offset-value">0x160</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Position</span> = <span class="offset-value">0x11C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Rotation</span> = <span class="offset-value">0xF8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ViewportInt16</span> = <span class="offset-value">0x2AC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ViewportSize</span> = <span class="offset-value">0x2E8</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">CharacterMesh</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BaseTextureId</span> = <span class="offset-value">0xE0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BodyPart</span> = <span class="offset-value">0x160</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MeshId</span> = <span class="offset-value">0x110</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">OverlayTextureId</span> = <span class="offset-value">0x140</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">DataModel</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CreatorId</span> = <span class="offset-value">0x188</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GameId</span> = <span class="offset-value">0x190</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GameLoaded</span> = <span class="offset-value">0x5F8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">JobId</span> = <span class="offset-value">0x138</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">PlaceId</span> = <span class="offset-value">0x198</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ServerIP</span> = <span class="offset-value">0x5E0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Workspace</span> = <span class="offset-value">0x178</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">FakeDataModel</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Pointer</span> = <span class="offset-value">0x7E83168</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RealDataModel</span> = <span class="offset-value">0x1C0</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">GuiBase2D</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AbsolutePosition</span> = <span class="offset-value">0x10C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AbsoluteRotation</span> = <span class="offset-value">0x188</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AbsoluteSize</span> = <span class="offset-value">0x118</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">GuiObject</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Active</span> = <span class="offset-value">0x59C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AnchorPoint</span> = <span class="offset-value">0x550</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AutomaticSize</span> = <span class="offset-value">0x558</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BackgroundColor3</span> = <span class="offset-value">0x538</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BackgroundTransparency</span> = <span class="offset-value">0x55C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BorderColor3</span> = <span class="offset-value">0x544</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BorderMode</span> = <span class="offset-value">0x560</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BorderSizePixel</span> = <span class="offset-value">0x564</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ClipsDescendants</span> = <span class="offset-value">0x59D</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GuiState</span> = <span class="offset-value">0x570</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Interactable</span> = <span class="offset-value">0x59F</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LayoutOrder</span> = <span class="offset-value">0x574</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Position</span> = <span class="offset-value">0x18C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Rotation</span> = <span class="offset-value">0x188</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Selectable</span> = <span class="offset-value">0x5A0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SelectionOrder</span> = <span class="offset-value">0x590</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Size</span> = <span class="offset-value">0x528</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SizeConstraint</span> = <span class="offset-value">0x594</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Visible</span> = <span class="offset-value">0x5A1</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ZIndex</span> = <span class="offset-value">0x598</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Humanoid</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AutoJumpEnabled</span> = <span class="offset-value">0x1D8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AutoRotate</span> = <span class="offset-value">0x1D9</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AutomaticScalingEnabled</span> = <span class="offset-value">0x1DA</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">BreakJointsOnDeath</span> = <span class="offset-value">0x1DB</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CameraOffset</span> = <span class="offset-value">0x140</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">DisplayDistanceType</span> = <span class="offset-value">0x18C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">EvaluateStateMachine</span> = <span class="offset-value">0x1DC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Health</span> = <span class="offset-value">0x194</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">HealthDisplayDistance</span> = <span class="offset-value">0x198</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">HealthDisplayType</span> = <span class="offset-value">0x19C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">HipHeight</span> = <span class="offset-value">0x1A0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">JumpHeight</span> = <span class="offset-value">0x1AC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">JumpPower</span> = <span class="offset-value">0x1B0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaxHealth</span> = <span class="offset-value">0x1B4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaxSlopeAngle</span> = <span class="offset-value">0x1B8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">NameDisplayDistance</span> = <span class="offset-value">0x1BC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">NameOcclusion</span> = <span class="offset-value">0x1C0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RequiresNeck</span> = <span class="offset-value">0x1E0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RigType</span> = <span class="offset-value">0x1C8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SeatPart</span> = <span class="offset-value">0x120</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Sit</span> = <span class="offset-value">0x1E1</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TargetPoint</span> = <span class="offset-value">0x164</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">UseJumpPower</span> = <span class="offset-value">0x1E3</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WalkSpeed</span> = <span class="offset-value">0x1D4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WalkSpeedCheck</span> = <span class="offset-value">0x3C0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WalkToPoint</span> = <span class="offset-value">0x17C</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">InputObject</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MousePosition</span> = <span class="offset-value">0xEC</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Instance</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AttributeContainer</span> = <span class="offset-value">0x48</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AttributeList</span> = <span class="offset-value">0x18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AttributeToNext</span> = <span class="offset-value">0x58</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AttributeToValue</span> = <span class="offset-value">0x18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ChildrenEnd</span> = <span class="offset-value">0x8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ChildrenStart</span> = <span class="offset-value">0x70</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ClassDescriptor</span> = <span class="offset-value">0x18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ClassName</span> = <span class="offset-value">0x8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Name</span> = <span class="offset-value">0xB0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Parent</span> = <span class="offset-value">0x68</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Lighting</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Ambient</span> = <span class="offset-value">0xD8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Atmosphere</span> = <span class="offset-value">0x1E8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Brightness</span> = <span class="offset-value">0x120</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ClockTime</span> = <span class="offset-value">0x1B8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ColorShift_Bottom</span> = <span class="offset-value">0xE4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ColorShift_Top</span> = <span class="offset-value">0xF0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">EnvironmentDiffuseScale</span> = <span class="offset-value">0x124</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">EnvironmentSpecularScale</span> = <span class="offset-value">0x128</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ExposureCompensation</span> = <span class="offset-value">0x12C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">FogColor</span> = <span class="offset-value">0xFC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">FogEnd</span> = <span class="offset-value">0x134</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">FogStart</span> = <span class="offset-value">0x138</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">OutdoorAmbient</span> = <span class="offset-value">0x108</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ShadowSoftness</span> = <span class="offset-value">0x140</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Sky</span> = <span class="offset-value">0x1D8</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">LightingParameters</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GeographicLatitude</span> = <span class="offset-value">0x190</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LightColor</span> = <span class="offset-value">0x15C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LightDirection</span> = <span class="offset-value">0x168</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyAmbient</span> = <span class="offset-value">0x150</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyAmbient2</span> = <span class="offset-value">0x194</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Source</span> = <span class="offset-value">0x174</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TrueMoonPosition</span> = <span class="offset-value">0x184</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TrueSunPosition</span> = <span class="offset-value">0x178</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">LocalScript</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Bytecode</span> = <span class="offset-value">0x1A8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Hash</span> = <span class="offset-value">0x1B8</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">MaterialColors</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Asphalt</span> = <span class="offset-value">0x30</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Basalt</span> = <span class="offset-value">0x27</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Brick</span> = <span class="offset-value">0xF</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Cobblestone</span> = <span class="offset-value">0x33</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Concrete</span> = <span class="offset-value">0xC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CrackedLava</span> = <span class="offset-value">0x2D</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Glacier</span> = <span class="offset-value">0x1B</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Grass</span> = <span class="offset-value">0x6</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Ground</span> = <span class="offset-value">0x2A</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Ice</span> = <span class="offset-value">0x36</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LeafyGrass</span> = <span class="offset-value">0x39</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Limestone</span> = <span class="offset-value">0x3F</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Mud</span> = <span class="offset-value">0x24</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Pavement</span> = <span class="offset-value">0x42</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Rock</span> = <span class="offset-value">0x18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Salt</span> = <span class="offset-value">0x3C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Sand</span> = <span class="offset-value">0x12</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Sandstone</span> = <span class="offset-value">0x21</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Slate</span> = <span class="offset-value">0x9</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Snow</span> = <span class="offset-value">0x1E</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WoodPlanks</span> = <span class="offset-value">0x15</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">MeshPart</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MeshId</span> = <span class="offset-value">0x2E8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextureId</span> = <span class="offset-value">0x318</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">ModuleScript</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Bytecode</span> = <span class="offset-value">0x150</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Hash</span> = <span class="offset-value">0x160</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">IsRobloxScript</span> = <span class="offset-value">0x180</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">MouseService</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">InputObject</span> = <span class="offset-value">0x110</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Player</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AccountAge</span> = <span class="offset-value">0x120</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Character</span> = <span class="offset-value">0x380</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">DisplayName</span> = <span class="offset-value">0x130</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">HealthDisplayDistance</span> = <span class="offset-value">0x338</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LocaleId</span> = <span class="offset-value">0x6B8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">NameDisplayDistance</span> = <span class="offset-value">0x344</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Team</span> = <span class="offset-value">0x290</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TeamColor</span> = <span class="offset-value">0x350</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">UserId</span> = <span class="offset-value">0x2B8</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Players</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LocalPlayer</span> = <span class="offset-value">0x130</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Primitive</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AssemblyAngularVelocity</span> = <span class="offset-value">0xFC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AssemblyLinearVelocity</span> = <span class="offset-value">0xF0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CFrame</span> = <span class="offset-value">0xC0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Material</span> = <span class="offset-value">0x246</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Orientation</span> = <span class="offset-value">0xC0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Position</span> = <span class="offset-value">0xE4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">PrimitiveFlags</span> = <span class="offset-value">0x1AE</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Rotation</span> = <span class="offset-value">0xC0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Size</span> = <span class="offset-value">0x1B0</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">PrimitiveFlags</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Anchored</span> = <span class="offset-value">0x2</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CanCollide</span> = <span class="offset-value">0x8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CanQuery</span> = <span class="offset-value">0x20</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CanTouch</span> = <span class="offset-value">0x10</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">ProximityPrompt</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ActionText</span> = <span class="offset-value">0xD0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Enabled</span> = <span class="offset-value">0x156</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">HoldDuration</span> = <span class="offset-value">0x140</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">KeyboardKeyCode</span> = <span class="offset-value">0x144</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaxActivationDistance</span> = <span class="offset-value">0x148</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ObjectText</span> = <span class="offset-value">0xF0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RequiresLineOfSight</span> = <span class="offset-value">0x157</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">RenderView</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LightingValid</span> = <span class="offset-value">0x148</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxValid</span> = <span class="offset-value">0x28D</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">ScriptContext</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RequireBypass</span> = <span class="offset-value">0x8E4</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Seat</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Occupant</span> = <span class="offset-value">0x220</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Sky</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MoonAngularSize</span> = <span class="offset-value">0x25C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MoonTextureId</span> = <span class="offset-value">0xE0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxBk</span> = <span class="offset-value">0x110</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxDn</span> = <span class="offset-value">0x140</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxFt</span> = <span class="offset-value">0x170</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxLf</span> = <span class="offset-value">0x1A0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxOrientation</span> = <span class="offset-value">0x250</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxRt</span> = <span class="offset-value">0x1D0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SkyboxUp</span> = <span class="offset-value">0x200</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">StarCount</span> = <span class="offset-value">0x260</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SunAngularSize</span> = <span class="offset-value">0x264</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SunTextureId</span> = <span class="offset-value">0x230</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">SpecialMesh</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MeshId</span> = <span class="offset-value">0x108</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Offset</span> = <span class="offset-value">0xD0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Scale</span> = <span class="offset-value">0xDC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextureId</span> = <span class="offset-value">0x130</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">TaskScheduler</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">JobEnd</span> = <span class="offset-value">0xD0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">JobName</span> = <span class="offset-value">0x18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">JobStart</span> = <span class="offset-value">0xC8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Pointer</span> = <span class="offset-value">0x7F25E08</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Team</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TeamColor</span> = <span class="offset-value">0xD0</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Terrain</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GrassLength</span> = <span class="offset-value">0x1F8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaterialColors</span> = <span class="offset-value">0x280</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WaterColor</span> = <span class="offset-value">0x1E8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WaterReflectance</span> = <span class="offset-value">0x200</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WaterTransparency</span> = <span class="offset-value">0x204</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WaterWaveSize</span> = <span class="offset-value">0x208</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WaterWaveSpeed</span> = <span class="offset-value">0x20C</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">TextButton</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">AutoButtonColor</span> = <span class="offset-value">0xA04</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ContentText</span> = <span class="offset-value">0xD18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Font</span> = <span class="offset-value">0x1140</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LineHeight</span> = <span class="offset-value">0xD8C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LocalizedText</span> = <span class="offset-value">0xD18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaxVisibleGraphemes</span> = <span class="offset-value">0x114C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Modal</span> = <span class="offset-value">0xA05</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RichText</span> = <span class="offset-value">0xE35</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Selected</span> = <span class="offset-value">0xA06</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Text</span> = <span class="offset-value">0xD18</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextColor3</span> = <span class="offset-value">0x1128</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextDirection</span> = <span class="offset-value">0xE38</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextScaled</span> = <span class="offset-value">0xD88</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextSize</span> = <span class="offset-value">0x1154</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextStrokeColor3</span> = <span class="offset-value">0x1134</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextStrokeTransparency</span> = <span class="offset-value">0x1158</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextTransparency</span> = <span class="offset-value">0x115C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextTruncate</span> = <span class="offset-value">0x1160</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextWrapped</span> = <span class="offset-value">0xDD8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextXAlignment</span> = <span class="offset-value">0x1164</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextYAlignment</span> = <span class="offset-value">0xDD4</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">TextLabel</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ContentText</span> = <span class="offset-value">0xA98</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Font</span> = <span class="offset-value">0xEC0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LineHeight</span> = <span class="offset-value">0xB0C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">LocalizedText</span> = <span class="offset-value">0xA98</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaxVisibleGraphemes</span> = <span class="offset-value">0xECC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RichText</span> = <span class="offset-value">0xBB5</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Text</span> = <span class="offset-value">0xA98</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextColor3</span> = <span class="offset-value">0xEA8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextDirection</span> = <span class="offset-value">0xBB8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextScaled</span> = <span class="offset-value">0xB08</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextSize</span> = <span class="offset-value">0xED4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextStrokeColor3</span> = <span class="offset-value">0xEB4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextStrokeTransparency</span> = <span class="offset-value">0xED8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextTransparency</span> = <span class="offset-value">0xEDC</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextTruncate</span> = <span class="offset-value">0xEE0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextWrapped</span> = <span class="offset-value">0xB58</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextXAlignment</span> = <span class="offset-value">0xEE4</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TextYAlignment</span> = <span class="offset-value">0xB54</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Tool</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CanBeDropped</span> = <span class="offset-value">0x4A0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Enabled</span> = <span class="offset-value">0x4A1</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Grip</span> = <span class="offset-value">0x470</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GripForward</span> = <span class="offset-value">0x488</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GripPos</span> = <span class="offset-value">0x494</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GripRight</span> = <span class="offset-value">0x470</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">GripUp</span> = <span class="offset-value">0x47C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ManualActivationOnly</span> = <span class="offset-value">0x4A2</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RequiresHandle</span> = <span class="offset-value">0x4A3</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Tooltip</span> = <span class="offset-value">0x450</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Value</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Value</span> = <span class="offset-value">0xD0</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">VehicleSeat</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">MaxSpeed</span> = <span class="offset-value">0x238</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Occupant</span> = <span class="offset-value">0x218</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">SteerFloat</span> = <span class="offset-value">0x240</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ThrottleFloat</span> = <span class="offset-value">0x248</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Torque</span> = <span class="offset-value">0x24C</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">TurnSpeed</span> = <span class="offset-value">0x250</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">VisualEngine</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Dimensions</span> = <span class="offset-value">0x720</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">FakeDataModel</span> = <span class="offset-value">0x700</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Pointer</span> = <span class="offset-value">0x7A36CD8</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">RenderView</span> = <span class="offset-value">0x800</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ViewMatrix</span> = <span class="offset-value">0x120</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">Workspace</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">CurrentCamera</span> = <span class="offset-value">0x460</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">ReadOnlyGravity</span> = <span class="offset-value">0x940</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">World</span> = <span class="offset-value">0x3D8</span>;
+    }
+
+    <span class="token-keyword">namespace</span> <span class="token-namespace">World</span> {
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Gravity</span> = <span class="offset-value">0x1D0</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">Primitives</span> = <span class="offset-value">0x240</span>;
+        <span class="token-keyword">inline</span> <span class="token-keyword">constexpr</span> <span class="token-type">uintptr_t</span> <span class="token-variable">WorldSteps</span> = <span class="offset-value">0x660</span>;
+    }
+
+} <span class="token-comment">// namespace offsets</span></code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <img src="logo.png" alt="Feather" class="w-6 h-6 object-contain opacity-50">
+                <span class="font-display font-bold text-gray-400 text-sm">FEATHER SOFTWORKS</span>
+            </div>
+            <div class="text-xs text-gray-600">
+                © 2026 Feather Softworks. Not affiliated with Roblox Corporation.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="glass rounded-lg px-6 py-4 border border-white/10 flex items-center space-x-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+            <span id="toastMessage" class="text-sm">Copied to clipboard</span>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Raw code for copying
+        const rawCode = `#pragma once
+#include <cstdint>
+
+// clang-format off
+namespace offsets {
+    inline constexpr const char* roblox_version = "version-760d064d05424689";
+
+    namespace Atmosphere {
+        inline constexpr uintptr_t Color = 0xD0;
+        inline constexpr uintptr_t Decay = 0xDC;
+        inline constexpr uintptr_t Density = 0xE8;
+        inline constexpr uintptr_t Glare = 0xEC;
+        inline constexpr uintptr_t Haze = 0xF0;
+        inline constexpr uintptr_t Offset = 0xF4;
+    }
+
+    namespace BasePart {
+        inline constexpr uintptr_t CastShadow = 0xF5;
+        inline constexpr uintptr_t Color3 = 0x194;
+        inline constexpr uintptr_t Locked = 0xF6;
+        inline constexpr uintptr_t Massless = 0xF7;
+        inline constexpr uintptr_t Primitive = 0x148;
+        inline constexpr uintptr_t Reflectance = 0xEC;
+        inline constexpr uintptr_t Shape = 0x1B1;
+        inline constexpr uintptr_t Transparency = 0xF0;
+    }
+
+    namespace BloomEffect {
+        inline constexpr uintptr_t Intensity = 0xD0;
+        inline constexpr uintptr_t Size = 0xD4;
+        inline constexpr uintptr_t Threshold = 0xD8;
+    }
+
+    namespace ByteCode {
+        inline constexpr uintptr_t Pointer = 0x10;
+        inline constexpr uintptr_t Size = 0x20;
+    }
+
+    namespace Camera {
+        inline constexpr uintptr_t CFrame = 0xF8;
+        inline constexpr uintptr_t FieldOfView = 0x160;
+        inline constexpr uintptr_t Position = 0x11C;
+        inline constexpr uintptr_t Rotation = 0xF8;
+        inline constexpr uintptr_t ViewportInt16 = 0x2AC;
+        inline constexpr uintptr_t ViewportSize = 0x2E8;
+    }
+
+    namespace CharacterMesh {
+        inline constexpr uintptr_t BaseTextureId = 0xE0;
+        inline constexpr uintptr_t BodyPart = 0x160;
+        inline constexpr uintptr_t MeshId = 0x110;
+        inline constexpr uintptr_t OverlayTextureId = 0x140;
+    }
+
+    namespace DataModel {
+        inline constexpr uintptr_t CreatorId = 0x188;
+        inline constexpr uintptr_t GameId = 0x190;
+        inline constexpr uintptr_t GameLoaded = 0x5F8;
+        inline constexpr uintptr_t JobId = 0x138;
+        inline constexpr uintptr_t PlaceId = 0x198;
+        inline constexpr uintptr_t ServerIP = 0x5E0;
+        inline constexpr uintptr_t Workspace = 0x178;
+    }
+
+    namespace FakeDataModel {
+        inline constexpr uintptr_t Pointer = 0x7E83168;
+        inline constexpr uintptr_t RealDataModel = 0x1C0;
+    }
+
+    namespace GuiBase2D {
+        inline constexpr uintptr_t AbsolutePosition = 0x10C;
+        inline constexpr uintptr_t AbsoluteRotation = 0x188;
+        inline constexpr uintptr_t AbsoluteSize = 0x118;
+    }
+
+    namespace GuiObject {
+        inline constexpr uintptr_t Active = 0x59C;
+        inline constexpr uintptr_t AnchorPoint = 0x550;
+        inline constexpr uintptr_t AutomaticSize = 0x558;
+        inline constexpr uintptr_t BackgroundColor3 = 0x538;
+        inline constexpr uintptr_t BackgroundTransparency = 0x55C;
+        inline constexpr uintptr_t BorderColor3 = 0x544;
+        inline constexpr uintptr_t BorderMode = 0x560;
+        inline constexpr uintptr_t BorderSizePixel = 0x564;
+        inline constexpr uintptr_t ClipsDescendants = 0x59D;
+        inline constexpr uintptr_t GuiState = 0x570;
+        inline constexpr uintptr_t Interactable = 0x59F;
+        inline constexpr uintptr_t LayoutOrder = 0x574;
+        inline constexpr uintptr_t Position = 0x18C;
+        inline constexpr uintptr_t Rotation = 0x188;
+        inline constexpr uintptr_t Selectable = 0x5A0;
+        inline constexpr uintptr_t SelectionOrder = 0x590;
+        inline constexpr uintptr_t Size = 0x528;
+        inline constexpr uintptr_t SizeConstraint = 0x594;
+        inline constexpr uintptr_t Visible = 0x5A1;
+        inline constexpr uintptr_t ZIndex = 0x598;
+    }
+
+    namespace Humanoid {
+        inline constexpr uintptr_t AutoJumpEnabled = 0x1D8;
+        inline constexpr uintptr_t AutoRotate = 0x1D9;
+        inline constexpr uintptr_t AutomaticScalingEnabled = 0x1DA;
+        inline constexpr uintptr_t BreakJointsOnDeath = 0x1DB;
+        inline constexpr uintptr_t CameraOffset = 0x140;
+        inline constexpr uintptr_t DisplayDistanceType = 0x18C;
+        inline constexpr uintptr_t EvaluateStateMachine = 0x1DC;
+        inline constexpr uintptr_t Health = 0x194;
+        inline constexpr uintptr_t HealthDisplayDistance = 0x198;
+        inline constexpr uintptr_t HealthDisplayType = 0x19C;
+        inline constexpr uintptr_t HipHeight = 0x1A0;
+        inline constexpr uintptr_t JumpHeight = 0x1AC;
+        inline constexpr uintptr_t JumpPower = 0x1B0;
+        inline constexpr uintptr_t MaxHealth = 0x1B4;
+        inline constexpr uintptr_t MaxSlopeAngle = 0x1B8;
+        inline constexpr uintptr_t NameDisplayDistance = 0x1BC;
+        inline constexpr uintptr_t NameOcclusion = 0x1C0;
+        inline constexpr uintptr_t RequiresNeck = 0x1E0;
+        inline constexpr uintptr_t RigType = 0x1C8;
+        inline constexpr uintptr_t SeatPart = 0x120;
+        inline constexpr uintptr_t Sit = 0x1E1;
+        inline constexpr uintptr_t TargetPoint = 0x164;
+        inline constexpr uintptr_t UseJumpPower = 0x1E3;
+        inline constexpr uintptr_t WalkSpeed = 0x1D4;
+        inline constexpr uintptr_t WalkSpeedCheck = 0x3C0;
+        inline constexpr uintptr_t WalkToPoint = 0x17C;
+    }
+
+    namespace InputObject {
+        inline constexpr uintptr_t MousePosition = 0xEC;
+    }
+
+    namespace Instance {
+        inline constexpr uintptr_t AttributeContainer = 0x48;
+        inline constexpr uintptr_t AttributeList = 0x18;
+        inline constexpr uintptr_t AttributeToNext = 0x58;
+        inline constexpr uintptr_t AttributeToValue = 0x18;
+        inline constexpr uintptr_t ChildrenEnd = 0x8;
+        inline constexpr uintptr_t ChildrenStart = 0x70;
+        inline constexpr uintptr_t ClassDescriptor = 0x18;
+        inline constexpr uintptr_t ClassName = 0x8;
+        inline constexpr uintptr_t Name = 0xB0;
+        inline constexpr uintptr_t Parent = 0x68;
+    }
+
+    namespace Lighting {
+        inline constexpr uintptr_t Ambient = 0xD8;
+        inline constexpr uintptr_t Atmosphere = 0x1E8;
+        inline constexpr uintptr_t Brightness = 0x120;
+        inline constexpr uintptr_t ClockTime = 0x1B8;
+        inline constexpr uintptr_t ColorShift_Bottom = 0xE4;
+        inline constexpr uintptr_t ColorShift_Top = 0xF0;
+        inline constexpr uintptr_t EnvironmentDiffuseScale = 0x124;
+        inline constexpr uintptr_t EnvironmentSpecularScale = 0x128;
+        inline constexpr uintptr_t ExposureCompensation = 0x12C;
+        inline constexpr uintptr_t FogColor = 0xFC;
+        inline constexpr uintptr_t FogEnd = 0x134;
+        inline constexpr uintptr_t FogStart = 0x138;
+        inline constexpr uintptr_t OutdoorAmbient = 0x108;
+        inline constexpr uintptr_t ShadowSoftness = 0x140;
+        inline constexpr uintptr_t Sky = 0x1D8;
+    }
+
+    namespace LightingParameters {
+        inline constexpr uintptr_t GeographicLatitude = 0x190;
+        inline constexpr uintptr_t LightColor = 0x15C;
+        inline constexpr uintptr_t LightDirection = 0x168;
+        inline constexpr uintptr_t SkyAmbient = 0x150;
+        inline constexpr uintptr_t SkyAmbient2 = 0x194;
+        inline constexpr uintptr_t Source = 0x174;
+        inline constexpr uintptr_t TrueMoonPosition = 0x184;
+        inline constexpr uintptr_t TrueSunPosition = 0x178;
+    }
+
+    namespace LocalScript {
+        inline constexpr uintptr_t Bytecode = 0x1A8;
+        inline constexpr uintptr_t Hash = 0x1B8;
+    }
+
+    namespace MaterialColors {
+        inline constexpr uintptr_t Asphalt = 0x30;
+        inline constexpr uintptr_t Basalt = 0x27;
+        inline constexpr uintptr_t Brick = 0xF;
+        inline constexpr uintptr_t Cobblestone = 0x33;
+        inline constexpr uintptr_t Concrete = 0xC;
+        inline constexpr uintptr_t CrackedLava = 0x2D;
+        inline constexpr uintptr_t Glacier = 0x1B;
+        inline constexpr uintptr_t Grass = 0x6;
+        inline constexpr uintptr_t Ground = 0x2A;
+        inline constexpr uintptr_t Ice = 0x36;
+        inline constexpr uintptr_t LeafyGrass = 0x39;
+        inline constexpr uintptr_t Limestone = 0x3F;
+        inline constexpr uintptr_t Mud = 0x24;
+        inline constexpr uintptr_t Pavement = 0x42;
+        inline constexpr uintptr_t Rock = 0x18;
+        inline constexpr uintptr_t Salt = 0x3C;
+        inline constexpr uintptr_t Sand = 0x12;
+        inline constexpr uintptr_t Sandstone = 0x21;
+        inline constexpr uintptr_t Slate = 0x9;
+        inline constexpr uintptr_t Snow = 0x1E;
+        inline constexpr uintptr_t WoodPlanks = 0x15;
+    }
+
+    namespace MeshPart {
+        inline constexpr uintptr_t MeshId = 0x2E8;
+        inline constexpr uintptr_t TextureId = 0x318;
+    }
+
+    namespace ModuleScript {
+        inline constexpr uintptr_t Bytecode = 0x150;
+        inline constexpr uintptr_t Hash = 0x160;
+        inline constexpr uintptr_t IsRobloxScript = 0x180;
+    }
+
+    namespace MouseService {
+        inline constexpr uintptr_t InputObject = 0x110;
+    }
+
+    namespace Player {
+        inline constexpr uintptr_t AccountAge = 0x120;
+        inline constexpr uintptr_t Character = 0x380;
+        inline constexpr uintptr_t DisplayName = 0x130;
+        inline constexpr uintptr_t HealthDisplayDistance = 0x338;
+        inline constexpr uintptr_t LocaleId = 0x6B8;
+        inline constexpr uintptr_t NameDisplayDistance = 0x344;
+        inline constexpr uintptr_t Team = 0x290;
+        inline constexpr uintptr_t TeamColor = 0x350;
+        inline constexpr uintptr_t UserId = 0x2B8;
+    }
+
+    namespace Players {
+        inline constexpr uintptr_t LocalPlayer = 0x130;
+    }
+
+    namespace Primitive {
+        inline constexpr uintptr_t AssemblyAngularVelocity = 0xFC;
+        inline constexpr uintptr_t AssemblyLinearVelocity = 0xF0;
+        inline constexpr uintptr_t CFrame = 0xC0;
+        inline constexpr uintptr_t Material = 0x246;
+        inline constexpr uintptr_t Orientation = 0xC0;
+        inline constexpr uintptr_t Position = 0xE4;
+        inline constexpr uintptr_t PrimitiveFlags = 0x1AE;
+        inline constexpr uintptr_t Rotation = 0xC0;
+        inline constexpr uintptr_t Size = 0x1B0;
+    }
+
+    namespace PrimitiveFlags {
+        inline constexpr uintptr_t Anchored = 0x2;
+        inline constexpr uintptr_t CanCollide = 0x8;
+        inline constexpr uintptr_t CanQuery = 0x20;
+        inline constexpr uintptr_t CanTouch = 0x10;
+    }
+
+    namespace ProximityPrompt {
+        inline constexpr uintptr_t ActionText = 0xD0;
+        inline constexpr uintptr_t Enabled = 0x156;
+        inline constexpr uintptr_t HoldDuration = 0x140;
+        inline constexpr uintptr_t KeyboardKeyCode = 0x144;
+        inline constexpr uintptr_t MaxActivationDistance = 0x148;
+        inline constexpr uintptr_t ObjectText = 0xF0;
+        inline constexpr uintptr_t RequiresLineOfSight = 0x157;
+    }
+
+    namespace RenderView {
+        inline constexpr uintptr_t LightingValid = 0x148;
+        inline constexpr uintptr_t SkyboxValid = 0x28D;
+    }
+
+    namespace ScriptContext {
+        inline constexpr uintptr_t RequireBypass = 0x8E4;
+    }
+
+    namespace Seat {
+        inline constexpr uintptr_t Occupant = 0x220;
+    }
+
+    namespace Sky {
+        inline constexpr uintptr_t MoonAngularSize = 0x25C;
+        inline constexpr uintptr_t MoonTextureId = 0xE0;
+        inline constexpr uintptr_t SkyboxBk = 0x110;
+        inline constexpr uintptr_t SkyboxDn = 0x140;
+        inline constexpr uintptr_t SkyboxFt = 0x170;
+        inline constexpr uintptr_t SkyboxLf = 0x1A0;
+        inline constexpr uintptr_t SkyboxOrientation = 0x250;
+        inline constexpr uintptr_t SkyboxRt = 0x1D0;
+        inline constexpr uintptr_t SkyboxUp = 0x200;
+        inline constexpr uintptr_t StarCount = 0x260;
+        inline constexpr uintptr_t SunAngularSize = 0x264;
+        inline constexpr uintptr_t SunTextureId = 0x230;
+    }
+
+    namespace SpecialMesh {
+        inline constexpr uintptr_t MeshId = 0x108;
+        inline constexpr uintptr_t Offset = 0xD0;
+        inline constexpr uintptr_t Scale = 0xDC;
+        inline constexpr uintptr_t TextureId = 0x130;
+    }
+
+    namespace TaskScheduler {
+        inline constexpr uintptr_t JobEnd = 0xD0;
+        inline constexpr uintptr_t JobName = 0x18;
+        inline constexpr uintptr_t JobStart = 0xC8;
+        inline constexpr uintptr_t Pointer = 0x7F25E08;
+    }
+
+    namespace Team {
+        inline constexpr uintptr_t TeamColor = 0xD0;
+    }
+
+    namespace Terrain {
+        inline constexpr uintptr_t GrassLength = 0x1F8;
+        inline constexpr uintptr_t MaterialColors = 0x280;
+        inline constexpr uintptr_t WaterColor = 0x1E8;
+        inline constexpr uintptr_t WaterReflectance = 0x200;
+        inline constexpr uintptr_t WaterTransparency = 0x204;
+        inline constexpr uintptr_t WaterWaveSize = 0x208;
+        inline constexpr uintptr_t WaterWaveSpeed = 0x20C;
+    }
+
+    namespace TextButton {
+        inline constexpr uintptr_t AutoButtonColor = 0xA04;
+        inline constexpr uintptr_t ContentText = 0xD18;
+        inline constexpr uintptr_t Font = 0x1140;
+        inline constexpr uintptr_t LineHeight = 0xD8C;
+        inline constexpr uintptr_t LocalizedText = 0xD18;
+        inline constexpr uintptr_t MaxVisibleGraphemes = 0x114C;
+        inline constexpr uintptr_t Modal = 0xA05;
+        inline constexpr uintptr_t RichText = 0xE35;
+        inline constexpr uintptr_t Selected = 0xA06;
+        inline constexpr uintptr_t Text = 0xD18;
+        inline constexpr uintptr_t TextColor3 = 0x1128;
+        inline constexpr uintptr_t TextDirection = 0xE38;
+        inline constexpr uintptr_t TextScaled = 0xD88;
+        inline constexpr uintptr_t TextSize = 0x1154;
+        inline constexpr uintptr_t TextStrokeColor3 = 0x1134;
+        inline constexpr uintptr_t TextStrokeTransparency = 0x1158;
+        inline constexpr uintptr_t TextTransparency = 0x115C;
+        inline constexpr uintptr_t TextTruncate = 0x1160;
+        inline constexpr uintptr_t TextWrapped = 0xDD8;
+        inline constexpr uintptr_t TextXAlignment = 0x1164;
+        inline constexpr uintptr_t TextYAlignment = 0xDD4;
+    }
+
+    namespace TextLabel {
+        inline constexpr uintptr_t ContentText = 0xA98;
+        inline constexpr uintptr_t Font = 0xEC0;
+        inline constexpr uintptr_t LineHeight = 0xB0C;
+        inline constexpr uintptr_t LocalizedText = 0xA98;
+        inline constexpr uintptr_t MaxVisibleGraphemes = 0xECC;
+        inline constexpr uintptr_t RichText = 0xBB5;
+        inline constexpr uintptr_t Text = 0xA98;
+        inline constexpr uintptr_t TextColor3 = 0xEA8;
+        inline constexpr uintptr_t TextDirection = 0xBB8;
+        inline constexpr uintptr_t TextScaled = 0xB08;
+        inline constexpr uintptr_t TextSize = 0xED4;
+        inline constexpr uintptr_t TextStrokeColor3 = 0xEB4;
+        inline constexpr uintptr_t TextStrokeTransparency = 0xED8;
+        inline constexpr uintptr_t TextTransparency = 0xEDC;
+        inline constexpr uintptr_t TextTruncate = 0xEE0;
+        inline constexpr uintptr_t TextWrapped = 0xB58;
+        inline constexpr uintptr_t TextXAlignment = 0xEE4;
+        inline constexpr uintptr_t TextYAlignment = 0xB54;
+    }
+
+    namespace Tool {
+        inline constexpr uintptr_t CanBeDropped = 0x4A0;
+        inline constexpr uintptr_t Enabled = 0x4A1;
+        inline constexpr uintptr_t Grip = 0x470;
+        inline constexpr uintptr_t GripForward = 0x488;
+        inline constexpr uintptr_t GripPos = 0x494;
+        inline constexpr uintptr_t GripRight = 0x470;
+        inline constexpr uintptr_t GripUp = 0x47C;
+        inline constexpr uintptr_t ManualActivationOnly = 0x4A2;
+        inline constexpr uintptr_t RequiresHandle = 0x4A3;
+        inline constexpr uintptr_t Tooltip = 0x450;
+    }
+
+    namespace Value {
+        inline constexpr uintptr_t Value = 0xD0;
+    }
+
+    namespace VehicleSeat {
+        inline constexpr uintptr_t MaxSpeed = 0x238;
+        inline constexpr uintptr_t Occupant = 0x218;
+        inline constexpr uintptr_t SteerFloat = 0x240;
+        inline constexpr uintptr_t ThrottleFloat = 0x248;
+        inline constexpr uintptr_t Torque = 0x24C;
+        inline constexpr uintptr_t TurnSpeed = 0x250;
+    }
+
+    namespace VisualEngine {
+        inline constexpr uintptr_t Dimensions = 0x720;
+        inline constexpr uintptr_t FakeDataModel = 0x700;
+        inline constexpr uintptr_t Pointer = 0x7A36CD8;
+        inline constexpr uintptr_t RenderView = 0x800;
+        inline constexpr uintptr_t ViewMatrix = 0x120;
+    }
+
+    namespace Workspace {
+        inline constexpr uintptr_t CurrentCamera = 0x460;
+        inline constexpr uintptr_t ReadOnlyGravity = 0x940;
+        inline constexpr uintptr_t World = 0x3D8;
+    }
+
+    namespace World {
+        inline constexpr uintptr_t Gravity = 0x1D0;
+        inline constexpr uintptr_t Primitives = 0x240;
+        inline constexpr uintptr_t WorldSteps = 0x660;
+    }
+
+} // namespace offsets`;
+
+        // Copy functionality
+        function copyCode() {
+            navigator.clipboard.writeText(rawCode).then(() => {
+                showToast('Copied to clipboard');
+                const btn = document.getElementById('copyText');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            }).catch(() => {
+                showToast('Failed to copy');
+            });
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const codeContent = document.getElementById('codeContent');
+            
+            if (searchTerm === '') {
+                // Remove all highlights
+                codeContent.innerHTML = codeContent.innerHTML.replace(/<span class="highlight">|<\/span>/g, '');
+                return;
+            }
+            
+            // Simple highlight implementation
+            const walker = document.createTreeWalker(codeContent, NodeFilter.SHOW_TEXT, null, false);
+            const nodes = [];
+            let node;
+            
+            while (node = walker.nextNode()) {
+                if (node.nodeValue.toLowerCase().includes(searchTerm)) {
+                    nodes.push(node);
+                }
+            }
+            
+            nodes.forEach(node => {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+                const parts = node.nodeValue.split(regex);
+                
+                parts.forEach((part, i) => {
+                    if (part.toLowerCase() === searchTerm) {
+                        const highlight = document.createElement('span');
+                        highlight.className = 'highlight';
+                        highlight.textContent = part;
+                        node.parentNode.insertBefore(highlight, node);
+                    } else {
+                        node.parentNode.insertBefore(document.createTextNode(part), node);
+                    }
+                });
+                
+                node.parentNode.removeChild(node);
+            });
+        });
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Calculate stats
+        function calculateStats() {
+            const namespaces = rawCode.match(/namespace \w+/g) || [];
+            const offsets = rawCode.match(/0x[0-9A-Fa-f]+/g) || [];
+            
+            document.getElementById('totalNamespaces').textContent = namespaces.length;
+            document.getElementById('totalOffsets').textContent = offsets.length;
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            calculateStats();
+        });
+    </script>
+</body>
+</html>
